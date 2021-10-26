@@ -19,6 +19,7 @@ Easy-peasy! Just run the following command and wait for applications to start.
 After applications start, you will be able to find the endpoints in [localhost](localhost:3333), port 3333.
 
 ## Architecture
+
 Here's a simple diagram of how this application works. 
 
 
@@ -35,6 +36,9 @@ E -- update transaction --> C
 ```
 
 ## License
+
 This project is under the MIT license. See the [LICENSE](https://github.com/ayrtonbsouza/bankly-test/blob/main/LICENSE) for more information.
+
+
 ---
  Made with ❤️ by **Ayrton Souza** :wave: [Get in touch!](https://www.linkedin.com/in/ayrtonsouza)
