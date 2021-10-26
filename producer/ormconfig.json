@@ -1,0 +1,17 @@
+{
+  "type": "postgres",
+  "port": 5432,
+  "host": "localhost",
+  "username": "bankly",
+  "password": "acesso",
+  "database": "bankly",
+  "migrations": [
+    "./src/infra/typeorm/migrations/*.ts"
+  ],
+  "entities": [
+    "./src/infra/typeorm/entities/*.ts"
+  ],
+  "cli": {
+    "migrationsDir": "./src/infra/typeorm/migrations"
+  }
+}

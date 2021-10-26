@@ -1,0 +1,27 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Acesso Bankly Transactions",
+    "description": "API developed as test for backend position @ Acesso/Bankly",
+    "version": "1.0.0",
+    "contact": {
+      "email": "ayrtonsouza@icloud.com"
+    }
+  },
+  "paths": {
+    "/transactions": {
+      "post": {
+        "tags": [
+          "transactions"
+        ],
+        "summary": "Create a new transaction",
+        "description": "Create a new transaction",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}
