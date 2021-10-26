@@ -31,6 +31,7 @@ export class CreateTransactions1635216474469 implements MigrationInterface {
           {
             name: 'error',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'createdAt',

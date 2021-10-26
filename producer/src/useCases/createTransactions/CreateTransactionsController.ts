@@ -17,6 +17,8 @@ export class CreateTransactionsController {
       value,
     })
 
+    await request.producer.connect();
+
     await request.producer.send({
       topic: 'transactions',
       compression: CompressionTypes.GZIP,

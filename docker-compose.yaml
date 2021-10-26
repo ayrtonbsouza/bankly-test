@@ -1,12 +1,33 @@
 version: "3.7"
 
 services:
+  producer:
+    build: ./producer
+    container_name: bankly_producer
+    restart: always
+    ports:
+      - 3333:3333
+      - 9229:9229
+    volumes: 
+      - ./producer:/usr/app
+    links:
+      - database
+      - kafka
+      - zookeeper
+    depends_on:
+      - database
+      - kafka
+      - zookeeper
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
 
   accounts:
     image: baldini/testacesso
     container_name: acesso_accounts
     ports:
       - "5000:80"
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
   
   database:
     image: postgres
@@ -15,11 +36,13 @@ services:
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_USER=bankly
-      - POSTGRES_PASSWORD=acesso
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
       - POSTGRES_DB=bankly
     volumes:
       - pgdata:/data/postgres
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
   
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.9.2
@@ -31,6 +54,8 @@ services:
       discovery.type: single-node
     networks:
       - elastic
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
 
   kibana:
     image: docker.elastic.co/kibana/kibana:7.9.2
@@ -42,9 +67,12 @@ services:
       ELASTICSEARCH_HOSTS: http://elasticsearch:9200
     networks:
       - elastic
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
   
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
+    container_name: bankly_zookeeper
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
     extra_hosts:
@@ -52,6 +80,7 @@ services:
 
   kafka:
     image: "confluentinc/cp-kafka:latest"
+    container_name: bankly_kafka
     depends_on:
       - zookeeper
     ports:
@@ -65,6 +94,21 @@ services:
       KAFKA_LISTENERS: INTERNAL://:9092,OUTSIDE://:9094
       KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9092,OUTSIDE://host.docker.internal:9094
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,OUTSIDE:PLAINTEXT
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+  
+  control-center:
+    image: confluentinc/cp-enterprise-control-center:6.0.1
+    hostname: control-center
+    depends_on:
+      - kafka
+    ports:
+      - "9021:9021"
+    environment:
+      CONTROL_CENTER_BOOTSTRAP_SERVERS: 'kafka:9092'
+      CONTROL_CENTER_REPLICATION_FACTOR: 1
+      CONTROL_CENTER_CONNECT_CLUSTER: http://kafka-connect:8083
+      PORT: 9021
     extra_hosts:
       - "host.docker.internal:172.17.0.1"
 

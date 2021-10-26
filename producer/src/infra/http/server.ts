@@ -12,6 +12,7 @@ import createConnection from '@/infra/typeorm';
 import '@/container';
 
 createConnection();
+
 const app = express();
 
 app.use(express.json());

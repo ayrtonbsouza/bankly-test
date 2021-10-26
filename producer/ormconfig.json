@@ -1,9 +1,9 @@
 {
   "type": "postgres",
   "port": 5432,
-  "host": "localhost",
-  "username": "bankly",
-  "password": "acesso",
+  "host": "database",
+  "username": "docker",
+  "password": "docker",
   "database": "bankly",
   "migrations": [
     "./src/infra/typeorm/migrations/*.ts"
