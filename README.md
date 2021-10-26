@@ -33,3 +33,8 @@ F --> E[consumer]
 E -- update transaction --> D
 E -- update transaction --> C
 ```
+
+## License
+This project is under the MIT license. See the [LICENSE](https://github.com/ayrtonbsouza/bankly-test/blob/main/LICENSE) for more information.
+---
+ Made with ❤️ by **Ayrton Souza** :wave: [Get in touch!](https://www.linkedin.com/in/ayrtonsouza)
