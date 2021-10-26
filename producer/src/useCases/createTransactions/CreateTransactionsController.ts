@@ -27,6 +27,13 @@ export class CreateTransactionsController {
       ]
     })
 
+    await request.elastic.index({
+      index: 'transactions',
+      type: 'transactions',
+      body: transaction
+    })
+
+
     return response.status(200).json({
       transactionId: transaction.id,
     })

@@ -13,13 +13,17 @@ export class Transaction {
   accountDestination: string;
 
   @Column()
-  status: string;
+  status?: string;
+
+  @Column()
+  error?: string;
 
   @Column()
   value: number;
 
   @CreateDateColumn()
   createdAt: Date;
+
 
   constructor() {
     if (!this.id) {
