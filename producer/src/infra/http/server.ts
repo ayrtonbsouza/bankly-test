@@ -3,7 +3,7 @@ import 'express-async-errors';
 import 'reflect-metadata'
 import swaggerUi from 'swagger-ui-express';
 
-import swaggerFile from '@/docs/swagger.json';
+import swaggerFile from '@/infra/docs/swagger.json';
 import { AppError } from '@/errors/AppError';
 import { getClient } from '@/infra/elastic';
 import { getProducer } from '@/infra/kafka';
