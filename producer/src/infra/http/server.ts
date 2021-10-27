@@ -14,7 +14,7 @@ import '@/container';
 createConnection();
 
 const app = express();
-
+getClient();
 app.use(express.json());
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use((request: Request, _: Response, next: NextFunction) => {

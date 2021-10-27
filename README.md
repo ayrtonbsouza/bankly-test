@@ -22,18 +22,7 @@ After applications start, you will be able to find the endpoints in [localhost](
 
 Here's a simple diagram of how this application works. 
 
-
-```mermaid
-graph LR
-A[producer] -- message --> B[kafka]
-A -- data --> C[elastic]
-A -- data --> D[postgresql]
-B -- message --> E[consumer]
-E -- verify account --> F[account-api]
-F --> E[consumer]
-E -- update transaction --> D
-E -- update transaction --> C
-```
+![diagram](https://user-images.githubusercontent.com/30063455/138977807-921017a5-096d-4c11-b366-3c04c7c0a1de.png)
 
 ## License
 
