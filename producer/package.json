@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect=0.0.0.0:9229 --transpile-only --ignore-watch node_modules --respawn src/infra/http/server.ts",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
-    "fix:lint": "eslint ./src/**/* --fix --ext .ts",
+    "fix:lint": "eslint --fix --ext .ts",
     "test": "jest"
   },
   "dependencies": {
@@ -37,7 +37,7 @@
     "eslint-plugin-import-helpers": "^1.1.0",
     "eslint-plugin-prettier": "^3.4.1",
     "jest": "^27.3.1",
-    "prettier": "^2.4.1",
+    "prettier": "^2.3.2",
     "ts-jest": "^27.0.7",
     "ts-node-dev": "^1.1.8",
     "tsconfig-paths": "^3.11.0",

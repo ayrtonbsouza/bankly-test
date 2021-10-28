@@ -13,11 +13,11 @@ services:
     links:
       - database
       - kafka
-      - zookeeper
+      - elasticsearch
     depends_on:
       - database
       - kafka
-      - zookeeper
+      - elasticsearch
     extra_hosts:
       - "host.docker.internal:172.17.0.1"
 

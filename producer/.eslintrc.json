@@ -22,7 +22,8 @@
   ],
   "rules": {
     "camelcase": "off",
-    "import/no-unresolved": "error",
+    "import/no-unresolved": "off",
+    "import/extensions": "off",
     "@typescript-eslint/naming-convention": [
       "error",
       {
@@ -43,13 +44,6 @@
     "no-useless-constructor": "off",
     "no-empty-function": "off",
     "lines-between-class-members": "off",
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "ts": "never"
-      }
-    ],
     "import-helpers/order-imports": [
       "warn",
       {
@@ -92,7 +86,7 @@
         "moduleDirectory": [
           "node_modules",
           "src/"
-        ],
+        ]
       }
     }
   }
