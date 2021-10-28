@@ -1,13 +1,13 @@
 import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
-import 'reflect-metadata'
+import 'reflect-metadata';
 import swaggerUi from 'swagger-ui-express';
 
-import swaggerFile from '@/infra/docs/swagger.json';
 import { AppError } from '@/errors/AppError';
+import swaggerFile from '@/infra/docs/swagger.json';
 import { getClient } from '@/infra/elastic';
-import { getProducer } from '@/infra/kafka';
 import { router } from '@/infra/http/routes';
+import { getProducer } from '@/infra/kafka';
 import createConnection from '@/infra/typeorm';
 import '@/container';
 
@@ -21,7 +21,7 @@ app.use((request: Request, _: Response, next: NextFunction) => {
   request.producer = getProducer();
   request.elastic = getClient();
   return next();
-})
+});
 app.use(router);
 app.use((error: Error, _: Request, response: Response) => {
   if (error instanceof AppError) {

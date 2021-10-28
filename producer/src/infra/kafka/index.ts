@@ -1,4 +1,4 @@
-import { Kafka, logLevel, Producer } from "kafkajs";
+import { Kafka, logLevel, Producer } from 'kafkajs';
 
 export function getProducer(): Producer {
   const kafka = new Kafka({
@@ -8,10 +8,10 @@ export function getProducer(): Producer {
     retry: {
       initialRetryTime: 300,
       retries: 10,
-    }
-  })
+    },
+  });
 
-  const producer = kafka.producer()
+  const producer = kafka.producer();
 
-  return producer
+  return producer;
 }
