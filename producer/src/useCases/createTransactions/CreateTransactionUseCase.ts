@@ -1,7 +1,8 @@
-import { ICreateTransactionDTO } from "@/dtos/ICreateTransactionDTO";
-import { Transaction } from "@/infra/typeorm/entities/Transaction";
-import { ITransactionsRepository } from "@/repositories/ITransactionsRepository";
-import { inject, injectable } from "tsyringe";
+import { inject, injectable } from 'tsyringe';
+
+import { ICreateTransactionDTO } from '@/dtos/ICreateTransactionDTO';
+import { Transaction } from '@/infra/typeorm/entities/Transaction';
+import { ITransactionsRepository } from '@/repositories/ITransactionsRepository';
 
 @injectable()
 export class CreateTransactionUseCase {
@@ -13,14 +14,14 @@ export class CreateTransactionUseCase {
   async execute({
     accountDestination,
     accountOrigin,
-    value
+    value,
   }: ICreateTransactionDTO): Promise<Transaction> {
     const transaction = await this.transactionsRepository.create({
       accountDestination,
       accountOrigin,
-      value
-    })
+      value,
+    });
 
-    return transaction
+    return transaction;
   }
 }

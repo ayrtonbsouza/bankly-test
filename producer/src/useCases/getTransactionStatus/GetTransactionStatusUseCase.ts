@@ -1,5 +1,6 @@
-import { ITransactionsRepository } from "@/repositories/ITransactionsRepository";
-import { inject, injectable } from "tsyringe";
+import { inject, injectable } from 'tsyringe';
+
+import { ITransactionsRepository } from '@/repositories/ITransactionsRepository';
 
 interface IStatus {
   status: string;
@@ -14,7 +15,9 @@ export class GetTransactionStatusUseCase {
   ) {}
 
   public async execute(transactionId: string): Promise<IStatus> {
-    const status = await this.transactionsRepository.getStatusById(transactionId);
-    return status
+    const status = await this.transactionsRepository.getStatusById(
+      transactionId
+    );
+    return status;
   }
 }

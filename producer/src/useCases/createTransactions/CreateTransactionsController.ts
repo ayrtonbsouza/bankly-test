@@ -1,11 +1,16 @@
-import { Transaction } from "@/infra/typeorm/entities/Transaction";
-import { Request, Response } from "express";
-import { CompressionTypes } from "kafkajs";
-import { container } from "tsyringe";
-import { CreateTransactionUseCase } from "./CreateTransactionUseCase";
+import { Request, Response } from 'express';
+import { CompressionTypes } from 'kafkajs';
+import { container } from 'tsyringe';
+
+import { Transaction } from '@/infra/typeorm/entities/Transaction';
+
+import { CreateTransactionUseCase } from './CreateTransactionUseCase';
 
 export class CreateTransactionsController {
-  private async sendToKafka(request: Request, transaction: Transaction): Promise<void> {
+  private async sendToKafka(
+    request: Request,
+    transaction: Transaction
+  ): Promise<void> {
     await request.producer.connect();
     try {
       await request.producer.send({
@@ -14,23 +19,26 @@ export class CreateTransactionsController {
         messages: [
           {
             value: JSON.stringify(transaction),
-          }
-        ]
-      })
+          },
+        ],
+      });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
-  private async sendToElastic(request: Request, transaction: Transaction): Promise<void> {
+  private async sendToElastic(
+    request: Request,
+    transaction: Transaction
+  ): Promise<void> {
     try {
       await request.elastic.index({
         index: 'transactions',
         type: 'transactions',
-        body: transaction
-      })
+        body: transaction,
+      });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
@@ -41,26 +49,24 @@ export class CreateTransactionsController {
       CreateTransactionUseCase
     );
 
-
     const transaction = await createTransactionUseCase.execute({
       accountOrigin,
       accountDestination,
       value,
-    })
-
+    });
 
     Promise.all([
       await this.sendToKafka(request, transaction),
-      await this.sendToElastic(request, transaction)
-    ]).catch(error => {
+      await this.sendToElastic(request, transaction),
+    ]).catch((error) => {
       return response.status(500).json({
         error: 'Error sending data',
-        message: error.message
-      })
-    })
+        message: error.message,
+      });
+    });
 
     return response.status(200).json({
       transactionId: transaction.id,
-    })
+    });
   }
 }
