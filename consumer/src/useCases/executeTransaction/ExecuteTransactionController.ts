@@ -1,6 +1,8 @@
 import { KafkaMessage } from 'kafkajs';
 import { container } from 'tsyringe';
 
+import { getClient } from '@/infra/elastic';
+
 import { ExecuteTransactionUseCase } from './ExecuteTransactionUseCase';
 
 export class ExecuteTransactionController {
@@ -19,6 +21,8 @@ export class ExecuteTransactionController {
       ExecuteTransactionUseCase
     );
 
+    const client = getClient();
+
     const transaction = await executeTransactionUseCase.execute({
       id,
       accountOrigin,
@@ -27,6 +31,13 @@ export class ExecuteTransactionController {
       error,
       value,
       createdAt,
+    });
+
+    await client.update({
+      index: 'transactions',
+      type: 'transactions',
+      id: transaction.id,
+      body: transaction,
     });
   }
 }

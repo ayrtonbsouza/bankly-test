@@ -2,6 +2,8 @@ import express from 'express';
 
 import { runConsumer } from '../kafka';
 
+import '@/container';
+
 const app = express();
 
 app.listen(3000, () => {
