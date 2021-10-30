@@ -1,5 +1,7 @@
 import { Consumer, Kafka, logLevel } from 'kafkajs';
 
+import { ExecuteTransactionController } from '@/useCases/executeTransaction/ExecuteTransactionController';
+
 function getConsumer(): Consumer {
   const kafka = new Kafka({
     clientId: 'transactions',
@@ -23,14 +25,11 @@ export async function runConsumer(): Promise<void> {
 
   await consumer.subscribe({ topic: 'transactions', fromBeginning: true });
 
+  const executeTransactionController = new ExecuteTransactionController();
+
   await consumer.run({
-    eachMessage: async ({ topic, partition, message }) => {
-      // Chamar a Controller
-      console.log('Resposta:', {
-        topic,
-        partition,
-        message,
-      });
+    eachMessage: async ({ message }) => {
+      executeTransactionController.handle(message);
     },
   });
 }
