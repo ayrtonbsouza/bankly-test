@@ -17,3 +17,6 @@ This project is under the MIT license. See the [LICENSE](https://github.com/ayrt
 
 ---
  Made with ❤️ by **Ayrton Souza** :wave: [Get in touch!](https://www.linkedin.com/in/ayrtonsouza)
+
+---
+![Visitor Count](https://profile-counter.glitch.me/ayrtonbsouza/count.svg)
